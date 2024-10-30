@@ -90,7 +90,7 @@ include_directories(
 add_executable(sync_i src/sync_image.cpp)
 add_executable(odom src/odom_correction.cpp)
 add_executable(semantic_Cloud src/semanticCloud.cpp)
-add_executable(explore_ZED_new src/exploration.cpp)
+add_executable(explore_ZED src/exploration.cpp)
 add_executable(commands_new src/voiceCommands_new.cpp)
 
 # Specify libraries to link a library or executable target against
@@ -98,7 +98,7 @@ target_link_libraries(odom ${catkin_LIBRARIES})
 target_link_libraries(sync_i ${catkin_LIBRARIES} ${TORCH_LIBRARIES} ${OpenCV_LIBRARIES})
 target_link_libraries(semantic_Cloud ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 target_link_libraries(commands_new ${catkin_LIBRARIES} ${PCL_LIBRARIES})
-target_link_libraries(explore_ZED_new ${catkin_LIBRARIES})
+target_link_libraries(explore_ZED ${catkin_LIBRARIES})
 
 # Add dependencies to the commands_new target
 add_dependencies(commands_new ${${PROJECT_NAME}_EXPORTED_TARGETS})
