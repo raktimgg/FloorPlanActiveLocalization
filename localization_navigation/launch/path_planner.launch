@@ -1,0 +1,26 @@
+<launch>
+	<!--Reading map-->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find localization_navigation)/config/costMapFromFloorPlan.yaml"/>
+
+	<!--Global and local planners-->
+	<node pkg="move_base" type="move_base" name="move_base">
+		<param name="base_global_planner" value="global_planner/GlobalPlanner" />
+			<param name="controller_frequency" value="30.0"/>
+			<param name="recovery_behavior_enabled" value="false" />
+			<param name="clearing_rotation_allowed" value="false" />  
+		<param name="GlobalPlanner/lethal_cost" value="135" />
+		<param name="GlobalPlanner/neutral_cost" value="66" />
+		<param name="GlobalPlanner/cost_factor" value="0.55" />
+			<rosparam file="$(find localization_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+			<rosparam file="$(find localization_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+			<rosparam file="$(find localization_navigation)/config/local_costmap_params.yaml" command="load" />
+			<rosparam file="$(find localization_navigation)/config/global_costmap_params.yaml" command="load" />
+		<rosparam file="$(find localization_navigation)/config/trajectory_planner.yaml" command="load" />
+	</node>
+	
+	<node name="commands" pkg="sem_cloud" type="commands_new" args=""/>
+	<node pkg="localization" type="marker" name="marker" />
+		
+	<!--Rviz-->
+	<node type="rviz" name="rviz" pkg="rviz" args="-d $(find localization_navigation)/config/path_planning.rviz" />
+</launch>

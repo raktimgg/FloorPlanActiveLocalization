@@ -1,0 +1,8 @@
+prefix=/home/crrl/crrl_ws/src/localization/build/devel
+
+Name: localization
+Description: Description of localization
+Version: 0.0.0
+Cflags: -I/home/crrl/crrl_ws/src/localization/build/devel/include -I/home/crrl/crrl_ws/src/localization/include
+Libs: -L${prefix}/lib -llocalization
+Requires: message_filters pcl_ros roscpp rospy rtabmap_ros sensor_msgs std_msgs message_runtime rospy roscpp

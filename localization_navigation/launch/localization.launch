@@ -1,0 +1,4 @@
+<launch>
+	<include file="$(find sem_cloud)/launch/superpoint_semantic_slam.launch"/> 
+	<node pkg="localization" type="slam2_decoupled" name="pose" output="screen" clear_params="true" args="" />
+</launch>

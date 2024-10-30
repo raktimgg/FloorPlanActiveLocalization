@@ -1,0 +1,2 @@
+set(localization_MESSAGE_FILES "/home/crrl/crrl_ws/src/localization/msg/topParticle.msg;/home/crrl/crrl_ws/src/localization/msg/coordinate.msg;/home/crrl/crrl_ws/src/localization/msg/landmark_msg.msg;/home/crrl/crrl_ws/src/localization/msg/particle_struct.msg;/home/crrl/crrl_ws/src/localization/msg/particle_msg.msg;/home/crrl/crrl_ws/src/localization/msg/robot_struct.msg;/home/crrl/crrl_ws/src/localization/msg/robot_msg.msg")
+set(localization_SERVICE_FILES "")

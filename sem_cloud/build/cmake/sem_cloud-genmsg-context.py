@@ -1,0 +1,11 @@
+# generated from genmsg/cmake/pkg-genmsg.context.in
+
+messages_str = "/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Info.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/KeyPoint.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/GlobalDescriptor.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/ScanDescriptor.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/MapData.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/MapGraph.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/NodeData.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Link.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/OdomInfo.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Point2f.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Point3f.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Goal.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/RGBDImage.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/RGBDImages.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/UserData.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/GPS.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Path.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/EnvSensor.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/nodes.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/Semantic.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/RGBDS.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/rgbdss.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/rds.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/imagepose.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/topParticle.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/particle_msg.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/particle_struct.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/robot_struct.msg;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg/commandsafe.msg"
+services_str = ""
+pkg_name = "sem_cloud"
+dependencies_str = "sensor_msgs;std_msgs;geometry_msgs"
+langs = "gencpp;geneus;genlisp;gennodejs;genpy"
+dep_include_paths_str = "sem_cloud;/home/crrl/floorplan_nav_ws/src/sem_cloud/msg;sensor_msgs;/opt/ros/noetic/share/sensor_msgs/cmake/../msg;std_msgs;/opt/ros/noetic/share/std_msgs/cmake/../msg;geometry_msgs;/opt/ros/noetic/share/geometry_msgs/cmake/../msg"
+PYTHON_EXECUTABLE = "/usr/bin/python3"
+package_has_static_sources = '' == 'TRUE'
+genmsg_check_deps_script = "/opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py"

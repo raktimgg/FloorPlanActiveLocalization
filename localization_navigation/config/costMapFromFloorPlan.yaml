@@ -1,0 +1,6 @@
+image: /home/crrl/crrl_ws/src/localization_navigation/floorplans/floorPlan.png
+resolution: 0.1
+origin: [0.0, 0.0, 0.0]
+occupied_thresh: 0.5
+free_thresh: 0.5
+negate: 0

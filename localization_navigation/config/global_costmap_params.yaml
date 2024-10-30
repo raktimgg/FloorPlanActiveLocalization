@@ -1,0 +1,14 @@
+global_costmap:
+  update_frequency: 2.5
+  publish_frequency: 2.5
+  transform_tolerance: 13.0
+  width: 282
+  height: 459
+  origin_x: 0.0
+  origin_y: 0.0
+  rolling_window: false
+  inflation_radius: 0.2
+  resolution: 1
+  plugins:
+   - {name: static_layer,        type: "costmap_2d::StaticLayer"}
+   - {name: inflation_layer,     type: "costmap_2d::InflationLayer"}

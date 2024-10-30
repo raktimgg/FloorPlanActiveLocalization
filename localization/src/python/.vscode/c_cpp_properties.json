@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/crrl/crrl_ws/src/sem_cloud/include/sem_cloud"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang-8",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-arm64"
+        }
+    ],
+    "version": 4
+}

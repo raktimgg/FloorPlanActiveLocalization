@@ -1,0 +1,73 @@
+    <launch>
+	<include file="$(find zed_wrapper)/launch/zed2.launch"/>
+	<node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="laser_scan_2D">
+		<remap from="image" to="/zed2/zed_node/depth/depth_registered"/>
+		<remap from="camera_info" to="/zed2/zed_node/depth/depth_registered/camera_info"/>
+		<remap from="scan" to="/zed2/zed_node/laser_scan"/>
+		<param name="output_frame_id" value="zed2_left_camera_frame"/>
+		<param name="scan_height" value="10"/>
+		<param name="range_min" value="0.1"/>
+	</node>
+	<node pkg="sem_cloud" type="odom" name="odom" clear_params="true" args="" />
+	<node pkg="sem_cloud" type="semantic_Cloud" name="cloud" clear_params="true" args=""/>
+	<node pkg="sem_cloud" type="sync_i" name="sync" clear_params="true" args=""/>
+	
+	 <group ns="rtabmap"> <!--namespace rtabmap-->
+            <arg name="rtabmap_args" default="--delete_db_on_start" /> <!--delete the database on start-->
+            <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" required="true" clear_params="true" args="$(arg rtabmap_args)" > <!--starting base rtabmap node-->
+                <!--parameters for rtabmap-->
+                <param name="subscribe_depth" type="bool" value="false" />
+                <param name="subscribe_rgb" type="bool" value="false" />
+                <param name="subscribe_stereo" type="bool" value="false" />
+                <param name="subscribe_rgbd" type="bool" value="true" />
+                <param name="subscribe_odom_info" type="bool" value="false" />
+                <param name="subscribe_user_data" type="bool" value="false" />
+                <param name="subscribe_scan_cloud" type="bool" value="false" />   <!--false for reverse loop closure, setting false without reverse loop closure also works-->
+                <param name="Mem/IncrementalMemory" type="bool" value="true" />
+                <param name="Mem/InitWMWithAllNodes" type="bool" value="false" />
+                <param name="approx_sync" type="bool" value="True" />
+                <param name="frame_id" type="string" value="base_link" />
+                <param name="gen_depth" type="bool" value="false" />
+                <param name="gen_depth_decimation" type="int" value="1" />
+                <param name="gen_depth_fill_holes_error" type="double" value="0.1" />
+                <param name="gen_depth_fill_holes_size" type="int" value="0" />
+                <param name="gen_depth_fill_iterations" type="int" value="1" />
+                <param name="gen_scan" type="bool" value="false" />
+                <!--topics to subcribe for rtabmap-->
+                <remap from="odom" to="/zed2/zed_node/odom_correct" />
+                <param name="SuperPoint/ModelPath" type="string" value="/home/crrl/superpoint_and_superglue_weights/superpoint.pt" />
+                <param name="Rtabmap/DetectionRate" type="string" value="0" />
+                <param name="Kp/DetectorStrategy" type="string" value="11" />
+                <param name="Vis/FeatureType" type="string" value="11" />
+                <param name="Optimizer/Strategy" type="string" value="1" />
+                <param name="Optimizer/Robust" type="string" value="true" />
+                <param name="RGBD/OptimizeMaxError" type="string" value="0.00" />
+                <param name="Optimizer/GravitySigma" type="string" value="0.00" />
+                <param name="RGBD/OptimizeFromGraphEnd" type="string" value="true" />
+                <param name="Optimizer/VarianceIgnored" type="string" value="true" />
+                <param name="g2o/Solver" type="string" value="3" />
+                <param name="g2o/Optimizer" type="string" value="0" />
+                <param name="Mem/UseOdomFeatures" type="string" value="false" />
+                <param name="Kp/MaxFeatures" type="string" value="500" />
+                <param name="Vis/MaxFeatures" type="string" value="500" />
+                <param name="RGBD/LinearUpdate" type="string" value="0" />
+                <param name="Odom/Strategy" type="string" value="0" />
+                <param name="Mem/UseOdomGravity" type="string" value="false" />
+                <param name="Reg/Force3DoF" type="string" value="true" />
+            </node>
+
+            <node name="rgbd_sync" pkg="nodelet" type="nodelet" required="true" args="standalone rtabmap_ros/rgbd_sync" clear_params="true" > <!--starting rgbd_sync node-->
+                <!--parameters for rgbd_sync-->
+                <param name="approx_sync" type="bool" value="True" />
+                <param name="approx_sync_max_interval" type="double" value="0.0" />
+                <param name="decimation" type="double" value="1.0" />
+                <param name="depth_scale" type="double" value="1.0" />
+                <param name="queue_size" type="int" value="10" />
+                <!--topics to subscribe-->
+                <remap from="rgb/image" to="/zed2/zed_node/rgb/image_rect_color" />
+                <remap from="depth/image" to="/zed2/zed_node/depth/depth_registered" />
+                <remap from="rgb/camera_info" to="/zed2/zed_node/depth/camera_info" />
+            </node>
+            
+        </group>
+</launch>
