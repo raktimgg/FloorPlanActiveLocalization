@@ -99,14 +99,14 @@ git clone https://github.com/Harshit0803/fp_files.git .
 ```
 3. Once cloned, it should look like this
 ```
-    ROS_WORKSPACE_PATH/
-        build/
-        devel/
-        src/
-          localization/
-          localization_navigation/
-          sem_cloud/
-          README.md
+ROS_WORKSPACE_PATH/
+    build/
+    devel/
+    src/
+      localization/
+      localization_navigation/
+      sem_cloud/
+      README.md
 ```
 4. Building the workspace
 ```bash
