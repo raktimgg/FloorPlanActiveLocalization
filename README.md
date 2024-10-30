@@ -1,12 +1,6 @@
-<!-- Run the following command to compile the workspace:
-
-catkin build --cmake-args -DWITH_TORCH=ON -DCMAKE_PREFIX_PATH="/opt/ros/noetic" -Drtabmap_ros_DIR="/home/crrl/floorplan_nav_ws/devel/.private/rtabmap_ros/share/rtabmap_ros/cmake"
-
-Key: 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 -->
-
 # Floor Plan Based Active Global Localization and Navigation Aid for Persons with Blindness and Low Vision
 
-This project presents a real-time system for active global localization and navigation, specifically designed to assist individuals with blindness and low vision in navigating unfamiliar environments. The system uses architectural floor plans and a stereo-inertial camera to generate semantically informed goals for exploration, effectively localizing the user and correcting for odometry drift. This work enhances accessibility and is adaptable for mobile robots, validated through extensive real-world indoor experiments.
+We presents a real-time system for floor plan based active global localization and navigation, specifically designed to assist individuals with blindness and low vision in unfamiliar environments. Architectural floor plans along with a stereo-inertial camera are employed to achieve active localization of the agent using a particle filter and semantically informed exploration. This work enhances accessibility and is adaptable for mobile robots, validated through extensive real-world indoor experiments.
 
 📖 Paper: [`RA-L`](https://ieeexplore.ieee.org/document/10734166)
 
@@ -27,11 +21,13 @@ We would like to thank [Tanishq Bhansali<sup>1</sup>](https://www.linkedin.com/i
 #### <sup>2</sup>Rusk Institute of Rehabilitation, New York University Grossman School of Medicine
 
 ### 💡 Contributions
-- **Active Global Localization**: Developed a real-time global localization system that leverages architectural floor plans, enabling navigation aid for individuals with blindness and low vision.
-- **Odometry Drift Correction**: Implemented a method to correct time-varying drift in odometry, ensuring accurate localization over extended periods.
-- **Loop Closure on Reversal**: Added loop closure functionality for handling path reversals, which improves localization stability in dynamic indoor environments.
-- **2D Semantic Point Cloud Generation**: Created a 2D semantic point cloud for enhanced real-time agent tracking and navigation, integrating semantic mapping with floor plan data.
-- **HRNet Integration**: Incorporated the HRNet model for robust semantic segmentation, improving the system’s perception and navigation accuracy.
+- **Active Global Localization**: Semantics-driven active global localization leveraging architectural floor plans and stereo-inertial sensors.
+- **Odometry Drift Correction**: A dynamic approach for correcting the agent’s time-varying odometry drift utilizing the floor plan, independent of prior knowledge of the agent’s initial pose.
+- **Loop Closure on Reversal**: Implementation of loop closure for reversal through the application of ICP and Bundle Adjustment techniques.
+- ⁠Development of an efficient, real-time semantic end-to-end system designed to facilitate navigation assistance for persons with blindness and low vision.
+- Extensive experiments on real-world environments showcasing the method’s efficacy.
+
+![alt text](algorithm.png)
 
 
 ## Table of Contents
