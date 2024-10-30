@@ -6,13 +6,13 @@ We presents a real-time system for floor plan based active global localization a
 
 📹 Video: [`Youtube`](https://www.youtube.com/watch?v=DEyLDDNrEqw)
 
-__Contributors:__ [Raktim Gautam Goswami<sup>1</sup>](https://raktimgg.github.io/my-website)
-, [Harshit Sinha<sup>1</sup>](https://www.linkedin.com/in/harshitsinha08)
-, [Venkata Amith Palacherla<sup>1</sup>](https://github.com/venkataPalacherla)
-, [Jagennath Hari<sup>1</sup>](https://github.com/jagennath-hari)
-, [Prashanth Krishnamurthy<sup>1</sup>](https://scholar.google.com/citations?user=W-_zgGgAAAAJ)
-, [JohnRoss Rizzo<sup>2</sup>](https://med.nyu.edu/faculty/johnross-rizzo)
-, [Farshad Khorrami<sup>1</sup>](https://scholar.google.com/citations?user=NdOqlPQAAAAJ&hl=en)
+__Contributors:__ [Raktim Gautam Goswami<sup>1</sup>](https://raktimgg.github.io/my-website),
+ [Harshit Sinha<sup>1</sup>](https://www.linkedin.com/in/harshitsinha08),
+ [Venkata Amith Palacherla<sup>1</sup>](https://github.com/venkataPalacherla),
+ [Jagennath Hari<sup>1</sup>](https://github.com/jagennath-hari),
+ [Prashanth Krishnamurthy<sup>1</sup>](https://scholar.google.com/citations?user=W-_zgGgAAAAJ),
+ [JohnRoss Rizzo<sup>2</sup>](https://med.nyu.edu/faculty/johnross-rizzo),
+ [Farshad Khorrami<sup>1</sup>](https://scholar.google.com/citations?user=NdOqlPQAAAAJ&hl=en)
 
 We would like to thank [Tanishq Bhansali<sup>1</sup>](https://www.linkedin.com/in/tanishq-bhansali) for his help in conducting the experiments.
 
@@ -27,7 +27,7 @@ We would like to thank [Tanishq Bhansali<sup>1</sup>](https://www.linkedin.com/i
 - ⁠Development of an efficient, real-time semantic end-to-end system designed to facilitate navigation assistance for persons with blindness and low vision.
 - Extensive experiments on real-world environments showcasing the method’s efficacy.
 
-![alt text](algorithm.png)
+![alt text](resources/algorithm.png)
 
 
 ## Table of Contents
@@ -38,7 +38,9 @@ We would like to thank [Tanishq Bhansali<sup>1</sup>](https://www.linkedin.com/i
   - [Dependencies](#13-dependencies)
   - [Changing the Semantic Segmentation Model in RTAB-Map](#14-changing-the-semantic-segmentation-model-in-rtab-map)
 - [Usage](#2-usage)
-- [Features](#3-features)
+  - [Building the Package](#21-building-the-package)
+  - [Modifying the Files for Custom FloorPlans](#22-modifying-the-files-for-custom-floorplans)
+  - [Running the Algorithm](#23-running-the-algorithm)
 
 ## 1. Installations
 
@@ -88,10 +90,12 @@ catkin build --cmake-args -DWITH_TORCH=ON -DCMAKE_BUILD_TYPE=Release
 
 ## 2. Usage
 
+### 2.1 Building the Package
+
 1. Navigate to the src folder of your ROS WORKSPACE.
 2. Clone this repository to the source folder. (remeber to but a period at the end)
 ```bash
-git clone https://github.com/Harshit0803/fp_files.git . 
+git clone https://github.com/raktimgg/FloorPlanActiveLocalization.git . 
 ```
 3. Once cloned, it should look like this
 ```
@@ -109,4 +113,68 @@ ROS_WORKSPACE_PATH/
 cd ..
 catkin build --cmake-args -DWITH_TORCH=ON -DCMAKE_BUILD_TYPE=Release \
 -Drtabmap_ros_DIR="/home/username/your_workspace/devel/.private/rtabmap_ros/share/rtabmap_ros/cmake"
+```
+
+### 2.2 Modifying the Files for Custom FloorPlans
+
+1. To change the permissible sapce, doors, walls text file follow the steps below:
+```bash
+cd ~/your_ros_workspace/src/localization/src/CPP
+```
+2. Open `slam2_decoupled.cpp` and edit lines 93-95 to set your desired paths for each model file:
+
+    Line 93: `/home/crrl/crrl_ws/src/localization/src/CPP/doors_walls/doors4.txt`
+
+    Line 94: `/home/crrl/crrl_ws/src/localization/src/CPP/doors_walls/walls4.txt`
+
+    Line 95: `/home/crrl/crrl_ws/src/localization/src/CPP/permissible_space4.txt`
+
+3. Go to the `sem_cloud` source folder:
+```bash
+cd ~/your_ros_workspace/src/sem_cloud/src
+```
+
+4. Open `exploration.cpp` and update lines 604-609 with your custom floor plan paths:
+
+    Line 604: `/home/crrl/crrl_ws/src/localization/src/CPP/permissible_space_library.txt`
+
+    Line 605: `/home/crrl/crrl_ws/src/localization/src/CPP/doors_walls/walls_library.txt`
+
+    Line 606: `/home/crrl/crrl_ws/src/localization/src/CPP/doors_walls/doors_library.txt`
+
+    Line 607: `/home/crrl/crrl_ws/src/localization/src/CPP/corner_pos.txt`
+
+    Line 608: `/home/crrl/crrl_ws/src/localization/src/CPP/permissible_space_library.txt`
+
+    Line 609: `/home/crrl/crrl_ws/src/sem_cloud/include/goal_rewards_library.txt`
+
+5. Go to the configuration directory for the floor plan:
+```bash
+cd ~/your_ros_workspace/src/localization_navigation/config
+```
+
+  Modify the `costMapFromFloorPlan.yaml` file to specify your custom floor plan image model.
+   
+### 2.3 Running the algorithm
+
+To launch the setup, use separate terminals to run the following commands:
+
+Terminal 1: Localization Launch
+```bash
+roslaunch localization_navigation localization.launch
+```
+
+Terminal 2: Path Planning
+```bash
+roslaunch localization_navigation path_planner.launch
+```
+
+Terminal 3: Exploration with ZED
+```bash
+rosrun sem_cloud explore_ZED
+```
+
+Terminal 4: Notification Service
+```bash 
+cd ~/your_ros_workspace/src/localization/src/python && python3 notification_python.py
 ```
