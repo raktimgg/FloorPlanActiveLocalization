@@ -1,8 +1,3 @@
-<!-- Run the following command to compile the workspace:
-
-catkin build --cmake-args -DWITH_TORCH=ON -DCMAKE_PREFIX_PATH="/opt/ros/noetic" -Drtabmap_ros_DIR="/home/crrl/floorplan_nav_ws/devel/.private/rtabmap_ros/share/rtabmap_ros/cmake"
-
-Key: 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 -->
 
 # Floor Plan Based Active Global Localization and Navigation Aid for Persons with Blindness and Low Vision
 
